@@ -5,7 +5,6 @@ Informação Gerais:
     
 Classes e Relações:
 
-    - Categoria: Nome da categoria
     - Console: Leitura de dados do console
     - Estoque: Gerencia produtos e fornecedores
     - Fornecedor: Nome e produtos fornecidos

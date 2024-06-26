@@ -11,7 +11,7 @@ public class Main {
         boolean running = true;
 
         while (running) {
-            System.out.println("\n--- Menu de Gerenciamento de Estoque ---");
+            System.out.println("\n--- Menu de Gerenciamento de Estoque ---\n");
             System.out.println("1. Adicionar Produto");
             System.out.println("2. Remover Produto");
             System.out.println("3. Listar Produtos");
@@ -22,7 +22,7 @@ public class Main {
             System.out.println("8. Limpar Estoque");
             System.out.println("9. Salvar e Sair");
 
-            int opcao = Console.lerInt("Escolha uma opção: ");
+            int opcao = Console.lerInt("\nEscolha uma opção: ");
 
             switch (opcao) {
                 case 1:
@@ -31,7 +31,7 @@ public class Main {
                     int quantidadeProduto = Console.lerInt("Informe a quantidade do Produto: ");
                     Produto produto = new Produto(nomeProduto, precoProduto, quantidadeProduto);
                     estoque.adicionarProduto(produto);
-                    System.out.println("Produto adicionado com sucesso.");
+                    System.out.println("\nProduto adicionado com sucesso.");
                     break;
                 case 2:
                     nomeProduto = Console.lerString("Informe o nome do Produto a ser removido: ");
@@ -45,10 +45,10 @@ public class Main {
                     }
                     break;
                 case 3:
-                    System.out.println("--- Produtos no Estoque ---");
+                    System.out.println("\n--- Produtos no Estoque ---\n");
                     List<Produto> produtos = estoque.listarProdutos();
                     if (produtos.isEmpty()) {
-                        System.out.println("Nenhum produto cadastrado.");
+                        System.out.println("\nNenhum produto cadastrado.");
                     } else {
                         for (Produto p : produtos) {
                             System.out.println(p.descricaoDetalhada());
@@ -60,7 +60,7 @@ public class Main {
                     String contatoFornecedor = Console.lerString("Informe o contato do Fornecedor: ");
                     Fornecedor fornecedor = new Fornecedor(nomeFornecedor, contatoFornecedor);
                     estoque.adicionarFornecedor(fornecedor);
-                    System.out.println("Fornecedor adicionado com sucesso.");
+                    System.out.println("\nFornecedor adicionado com sucesso.");
                     break;
                 case 5:
                     nomeFornecedor = Console.lerString("Informe o nome do Fornecedor a ser removido: ");
@@ -68,16 +68,16 @@ public class Main {
 
                     if (fornecedorParaRemover != null) {
                         estoque.removerFornecedor(fornecedorParaRemover);
-                        System.out.println("Fornecedor removido com sucesso.");
+                        System.out.println("\nFornecedor removido com sucesso.");
                     } else {
-                        System.out.println("Fornecedor não encontrado.");
+                        System.out.println("\nFornecedor não encontrado.");
                     }
                     break;
                 case 6:
-                    System.out.println("--- Fornecedores ---");
+                    System.out.println("\n--- Fornecedores ---");
                     List<Fornecedor> fornecedores = estoque.listarFornecedores();
                     if (fornecedores.isEmpty()) {
-                        System.out.println("Nenhum fornecedor cadastrado.");
+                        System.out.println("\nNenhum fornecedor cadastrado.");
                     } else {
                         for (Fornecedor f : fornecedores) {
                             System.out.println(f.descricaoDetalhada());
@@ -86,29 +86,29 @@ public class Main {
                     break;
                 case 7:
                     if (estoque.listarProdutos().isEmpty()) {
-                        System.out.println("Não há produtos disponíveis para venda.");
+                        System.out.println("\nNão há produtos disponíveis para venda.");
                         break;
                     }
 
-                    System.out.println("--- Realizar Venda ---");
-                    System.out.println("Produtos Disponíveis:");
+                    System.out.println("\n--- Realizar Venda ---");
+                    System.out.println("\nProdutos Disponíveis:");
 
                     List<Produto> produtosDisponiveis = estoque.listarProdutos();
                     for (int i = 0; i < produtosDisponiveis.size(); i++) {
                         System.out.printf("%d. %s%n", i + 1, produtosDisponiveis.get(i).getNome());
                     }
 
-                    int opcaoProduto = Console.lerInt("Escolha o produto a ser vendido (ou 0 para cancelar): ");
+                    int opcaoProduto = Console.lerInt("\nEscolha o produto a ser vendido (ou 0 para cancelar): ");
                     if (opcaoProduto < 1 || opcaoProduto > produtosDisponiveis.size()) {
-                        System.out.println("Opção inválida ou cancelada.");
+                        System.out.println("\nOpção inválida ou cancelada.");
                         break;
                     }
 
                     Produto produtoVenda = produtosDisponiveis.get(opcaoProduto - 1);
-                    int quantidadeVenda = Console.lerInt("Informe a quantidade a ser vendida: ");
+                    int quantidadeVenda = Console.lerInt("\nInforme a quantidade a ser vendida: ");
 
                     if (quantidadeVenda <= 0 || quantidadeVenda > produtoVenda.getQuantidade()) {
-                        System.out.println("Quantidade inválida ou superior ao estoque disponível.");
+                        System.out.println("\nQuantidade inválida ou superior ao estoque disponível.");
                         break;
                     }
 
@@ -116,20 +116,20 @@ public class Main {
                     Venda venda = new Venda();
                     venda.processarVenda(produtoVenda, quantidadeVenda);
                     produtoVenda.setQuantidade(produtoVenda.getQuantidade() - quantidadeVenda);
-                    System.out.println("Venda realizada com sucesso.");
+                    System.out.println("\nVenda realizada com sucesso.");
                     break;
                 case 8:
                     estoque.limparEstoque();
-                    System.out.println("Estoque limpo com sucesso.");
+                    System.out.println("\nEstoque limpo com sucesso.");
                     break;
                 case 9:
                     // Salva os dados e finaliza o programa
                     estoque.salvarDados();
                     running = false;
-                    System.out.println("Sistema encerrado.");
+                    System.out.println("\nSistema encerrado.");
                     break;
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("\nOpção inválida.");
                     break;
             }
         }
